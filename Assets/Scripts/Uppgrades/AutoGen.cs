@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Uppgrade1 : MonoBehaviour
+public class AutoGen : MonoBehaviour
 {
     [SerializeField]
     TMP_Text uppgradeLevel;
@@ -21,18 +21,26 @@ public class Uppgrade1 : MonoBehaviour
     ClickableCoin CC;
 
     public int level;
-    float upCost;
+   
     int upCostRound;
+    float timer;
+    float perSecGen;
+
+    //change in arv
+    [SerializeField]
+    public float upCost;
+    [SerializeField]
+    public float incCost;
+    public float incPerLevel;
 
     // Start is called before the first frame update
     void Start()
     {
         CC = Manager.GetComponent<ClickableCoin>();
-        upCost = 20;
     }
 
     // Update is called once per frame
-    void Update()
+   void Update()
     {
         if (CC.CoinCounter < upCostRound)
         {
@@ -45,6 +53,16 @@ public class Uppgrade1 : MonoBehaviour
         upCostRound = (int)(upCost + 0.5f);
         uppgradeLevel.text = level.ToString();
         cost.text = upCostRound.ToString();
+
+        timer += Time.deltaTime;
+
+        if (timer >= 0.1f)
+        {
+            CC.CoinCounter += (perSecGen / 10);
+            timer = 0;
+        }
+
+        perSecGen = incPerLevel * level;
     }
 
     public void onButtonPress()
@@ -53,7 +71,7 @@ public class Uppgrade1 : MonoBehaviour
         {
             level++;
             CC.CoinCounter -= upCostRound;
-            upCost *= 1.3f;
+            upCost *= incCost;
         }
     }
 }
