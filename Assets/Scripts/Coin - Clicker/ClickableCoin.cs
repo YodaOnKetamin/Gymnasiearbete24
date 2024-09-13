@@ -15,6 +15,8 @@ public class ClickableCoin : MonoBehaviour
 
    public float CoinCounter;
 
+    int coinCouterRound;
+
     float clickerMulti;
 
     // Start is called before the first frame update
@@ -26,7 +28,8 @@ public class ClickableCoin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CoinCounterText.text = CoinCounter.ToString();
+        coinCouterRound = (int)(CoinCounter + 0.5f);
+        CoinCounterText.text = coinCouterRound.ToString();
         clickerMulti = (upgrade1.level+1);
     }
 

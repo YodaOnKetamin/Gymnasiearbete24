@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class AutoGen : MonoBehaviour
 {
     [SerializeField]
+    string UpradeName;
+    [SerializeField]
     TMP_Text uppgradeLevel;
 
     [SerializeField]
@@ -32,6 +34,8 @@ public class AutoGen : MonoBehaviour
     [SerializeField]
     public float incCost;
     public float incPerLevel;
+
+    
 
     // Start is called before the first frame update
     void Start()
