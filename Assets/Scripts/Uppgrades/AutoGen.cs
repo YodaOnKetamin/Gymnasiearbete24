@@ -25,8 +25,8 @@ public class AutoGen : MonoBehaviour
     public int level;
    
     int upCostRound;
-    float timer;
-    float perSecGen;
+   
+    public float perSecGen;
 
     //change in arv
     [SerializeField]
@@ -38,13 +38,13 @@ public class AutoGen : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         CC = Manager.GetComponent<ClickableCoin>();
     }
 
     // Update is called once per frame
-   void Update()
+    public virtual void Update()
     {
         if (CC.CoinCounter < upCostRound)
         {
@@ -57,15 +57,6 @@ public class AutoGen : MonoBehaviour
         upCostRound = (int)(upCost + 0.5f);
         uppgradeLevel.text = level.ToString();
         cost.text = upCostRound.ToString();
-
-        timer += Time.deltaTime;
-
-        if (timer >= 0.1f)
-        {
-            CC.CoinCounter += (perSecGen / 10);
-            timer = 0;
-        }
-
         perSecGen = incPerLevel * level;
     }
 
