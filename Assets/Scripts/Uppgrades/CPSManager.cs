@@ -19,14 +19,14 @@ public class CPSManager : MonoBehaviour
 
     ClickableCoin CC;
 
-    float minionCPSBoost;
-    float mineCPSBoost;
-    float factoryCPSBoost;
-    float totalCPSBoost;
+    public float minionCPSBoost;
+    public float mineCPSBoost;
+    public float factoryCPSBoost;
+    public float totalCPSBoost;
 
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         Factory = upgradeManager.GetComponent<Factory>();
         Mine = upgradeManager.GetComponent<Mine>();
@@ -39,7 +39,7 @@ public class CPSManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         timer += Time.deltaTime;
         if (timer >= 0.1f)
@@ -48,7 +48,7 @@ public class CPSManager : MonoBehaviour
             timer = 0;
         }
 
-        CPScounter.text = "CPS:" + totalCPS.ToString();
+        CPScounter.text = "CPS: " + totalCPS.ToString();
 
         totalCPS = totalCPSBoost * ((Minion.perSecGen * minionCPSBoost) + (Mine.perSecGen * mineCPSBoost) + (Factory.perSecGen * factoryCPSBoost));
     }

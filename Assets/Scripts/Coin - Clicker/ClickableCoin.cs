@@ -18,6 +18,7 @@ public class ClickableCoin : MonoBehaviour
     int coinCouterRound;
 
     float clickerMulti;
+    public float cilckerUp;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,6 @@ public class ClickableCoin : MonoBehaviour
 
     public void onButtonPress() 
     {
-        CoinCounter += (1 * clickerMulti);
+        CoinCounter += (clickerMulti);
     }
 }

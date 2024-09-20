@@ -8,8 +8,8 @@ public class CPSUpgrades : MonoBehaviour
 {
     [SerializeField]
     GameObject Manager;
-    CPSManager cPSM;
-    ClickableCoin CC;
+   public  CPSManager cPSM;
+   public ClickableCoin CC;
 
     [SerializeField]
     TMP_Text cost;
@@ -18,7 +18,7 @@ public class CPSUpgrades : MonoBehaviour
     [SerializeField]
     Button button;
 
-    int level;
+    public int level;
     [SerializeField]
     public float upCost;
     [SerializeField]
@@ -27,14 +27,14 @@ public class CPSUpgrades : MonoBehaviour
     int upCostRound;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         cPSM = Manager.GetComponent<CPSManager>();
         CC = Manager.GetComponent<ClickableCoin>();
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (CC.CoinCounter < upCostRound)
         {
@@ -45,7 +45,7 @@ public class CPSUpgrades : MonoBehaviour
             button.interactable = true;
         }
         upCostRound = (int)(upCost + 0.5f);
-        uppgradeLevel.text = level.ToString();
+        uppgradeLevel.text = "lvl: "+level.ToString();
         cost.text = upCostRound.ToString();
     }
 
