@@ -35,12 +35,15 @@ public class AutoGen : MonoBehaviour
     public float incCost;
     public float incPerLevel;
 
+    BuySellManager BSM;
+    
     
 
     // Start is called before the first frame update
     public virtual void Start()
     {
         CC = Manager.GetComponent<ClickableCoin>();
+        BSM = Manager.GetComponent<BuySellManager>();
     }
 
     // Update is called once per frame
@@ -58,15 +61,28 @@ public class AutoGen : MonoBehaviour
         uppgradeLevel.text = level.ToString();
         cost.text = upCostRound.ToString();
         perSecGen = incPerLevel * level;
+
+       
     }
 
     public void onButtonPress()
     {
-        if (CC.CoinCounter >= upCostRound)
+        if (BSM.buy == true)
         {
-            level++;
-            CC.CoinCounter -= upCostRound;
-            upCost *= incCost;
+            if (CC.CoinCounter >= upCostRound)
+            {
+                level++;
+                CC.CoinCounter -= upCostRound;
+                upCost = upCost * Mathf.Pow(incCost, level);
+            }
         }
+        else
+        {
+            BSM.sellamount = upCost* (Mathf.Pow(incCost,level-1));
+            CC.CoinCounter += BSM.sellamount;
+            BSM.sellamount = 0;
+            level--;
+        }
+       
     }
 }
