@@ -43,13 +43,13 @@ public class BuySellManager : MonoBehaviour
         }
     }
 
-    void OnBuyButtonPress() 
+    public void OnBuyButtonPress() 
     {
         buy = true;
         sell = false;
     }
 
-    void OnSellButtonPress()
+    public void OnSellButtonPress()
     {
         sell = true;
         buy = false;

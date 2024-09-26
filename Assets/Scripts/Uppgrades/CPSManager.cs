@@ -11,6 +11,7 @@ public class CPSManager : MonoBehaviour
     Factory Factory;
     Mine Mine;
     Minion Minion;
+    Bank Bank;
     [SerializeField]
     GameObject upgradeManager;
 
@@ -23,6 +24,7 @@ public class CPSManager : MonoBehaviour
     public float mineCPSBoost;
     public float factoryCPSBoost;
     public float totalCPSBoost;
+    public float bankCPSBoost;
 
 
     // Start is called before the first frame update
@@ -32,10 +34,12 @@ public class CPSManager : MonoBehaviour
         Mine = upgradeManager.GetComponent<Mine>();
         Minion = upgradeManager.GetComponent<Minion>();
         CC = gameObject.GetComponent<ClickableCoin>();
+        Bank = upgradeManager.GetComponent<Bank>();
         totalCPSBoost = 1;
         minionCPSBoost = 1;
         mineCPSBoost = 1;
         factoryCPSBoost = 1;
+        bankCPSBoost = 1;
     }
 
     // Update is called once per frame
@@ -50,6 +54,6 @@ public class CPSManager : MonoBehaviour
 
         CPScounter.text = "CPS: " + totalCPS.ToString();
 
-        totalCPS = totalCPSBoost * ((Minion.perSecGen * minionCPSBoost) + (Mine.perSecGen * mineCPSBoost) + (Factory.perSecGen * factoryCPSBoost));
+        totalCPS = totalCPSBoost * ((Minion.perSecGen * minionCPSBoost) + (Mine.perSecGen * mineCPSBoost) + (Factory.perSecGen * factoryCPSBoost)+ (Bank.perSecGen * bankCPSBoost));
     }
 }

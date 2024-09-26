@@ -32,6 +32,8 @@ public class AutoGen : MonoBehaviour
     [SerializeField]
     public float upCost;
     [SerializeField]
+    public float BaseCost;
+    [SerializeField]
     public float incCost;
     public float incPerLevel;
 
@@ -49,14 +51,29 @@ public class AutoGen : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        if (CC.CoinCounter < upCostRound)
+        if (BSM.buy == true)
         {
-            button.interactable = false;
+            if (CC.CoinCounter < upCostRound)
+            {
+                button.interactable = false;
+            }
+            else
+            {
+                button.interactable = true;
+            }
         }
         else
         {
-            button.interactable = true;
+            if (level == 0)
+            {
+                button.interactable = false;
+            }
+            else
+            {
+                button.interactable = true;
+            }
         }
+       
         upCostRound = (int)(upCost + 0.5f);
         uppgradeLevel.text = level.ToString();
         cost.text = upCostRound.ToString();
@@ -73,15 +90,17 @@ public class AutoGen : MonoBehaviour
             {
                 level++;
                 CC.CoinCounter -= upCostRound;
-                upCost = upCost * Mathf.Pow(incCost, level);
+                
+                upCost = BaseCost * Mathf.Pow(incCost, level);
             }
         }
         else
         {
-            BSM.sellamount = upCost* (Mathf.Pow(incCost,level-1));
+            BSM.sellamount = 0.8f *(BaseCost* (Mathf.Pow(incCost,level-1)));
             CC.CoinCounter += BSM.sellamount;
             BSM.sellamount = 0;
             level--;
+            upCost = BaseCost * Mathf.Pow(incCost, level);
         }
        
     }

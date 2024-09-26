@@ -19,28 +19,48 @@ public class Uppgrade1 : MonoBehaviour
     Button button;
 
     ClickableCoin CC;
+    BuySellManager BSM;
 
     public int level;
     float upCost;
+    float BaseCost;
     int upCostRound;
+    float incCost;
 
     // Start is called before the first frame update
     void Start()
     {
         CC = Manager.GetComponent<ClickableCoin>();
+        BSM = Manager.GetComponent<BuySellManager>();
         upCost = 20;
+        BaseCost = 20;
+        incCost = 1.3f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (CC.CoinCounter < upCostRound)
+        if (BSM.buy == true)
         {
-            button.interactable = false;
+            if (CC.CoinCounter < upCostRound)
+            {
+                button.interactable = false;
+            }
+            else
+            {
+                button.interactable = true;
+            }
         }
         else
         {
-            button.interactable = true;
+            if (level == 0)
+            {
+                button.interactable = false;
+            }
+            else
+            {
+                button.interactable = true;
+            }
         }
         upCostRound = (int)(upCost + 0.5f);
         uppgradeLevel.text = level.ToString();
@@ -49,11 +69,22 @@ public class Uppgrade1 : MonoBehaviour
 
     public void onButtonPress()
     {
-        if (CC.CoinCounter >= upCostRound)
+        if (BSM.buy == true)
         {
-            level++;
-            CC.CoinCounter -= upCostRound;
-            upCost *= 1.3f;
+            if (CC.CoinCounter >= upCostRound)
+            {
+                level++;
+                CC.CoinCounter -= upCostRound;
+                upCost = BaseCost * Mathf.Pow(incCost, level);
+            }
+        }
+        else
+        {
+            BSM.sellamount = 0.8f * (BaseCost * (Mathf.Pow(incCost, level - 1)));
+            CC.CoinCounter += BSM.sellamount;
+            BSM.sellamount = 0;
+            level--;
+            upCost = BaseCost * Mathf.Pow(incCost, level);
         }
     }
 }
