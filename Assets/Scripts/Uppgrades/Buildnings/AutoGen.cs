@@ -46,6 +46,7 @@ public class AutoGen : MonoBehaviour
     {
         CC = Manager.GetComponent<ClickableCoin>();
         BSM = Manager.GetComponent<BuySellManager>();
+        upCost = BaseCost * Mathf.Pow(incCost, level);
     }
 
     // Update is called once per frame

@@ -22,7 +22,7 @@ public class Uppgrade1 : MonoBehaviour
     BuySellManager BSM;
 
     public int level;
-    float upCost;
+    public float upCost;
     float BaseCost;
     int upCostRound;
     float incCost;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Globalization;
 
 public class ClickableCoin : MonoBehaviour
 {
@@ -30,7 +31,11 @@ public class ClickableCoin : MonoBehaviour
     void Update()
     {
         coinCouterRound = (int)(CoinCounter + 0.5f);
-        CoinCounterText.text = coinCouterRound.ToString();
+
+            CoinCounterText.text = coinCouterRound.ToString();
+        
+        
+        
         clickerMulti = (upgrade1.level+1);
     }
 
